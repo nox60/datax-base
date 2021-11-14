@@ -10,7 +10,7 @@ node {
         print "Current branch is ${env.CURRENT_BRANCH}"
 
         try{
-            git  url: "https://github.com/alibaba/DataX.git", branch: "master"
+            git  url: "https://gitee.com/nox/DataX.git", branch: "master"
         }catch(e){
             env.CURRENT_STAGE = '拉取GIT代码'
             env.FAILED_REASON = e
