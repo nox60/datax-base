@@ -38,6 +38,9 @@ node {
         def dockerImageCore = null
         try{
             sh 'cp /usr/share/zoneinfo/Asia/Shanghai .'
+            sh 'cat>Dockerfile<<EOF
+                NodeOUs:
+            EOF'
             dockerImageCore = docker.build("registry.cn-hangzhou.aliyuncs.com/nox60/datax-base")
             docker.withRegistry("https://registry.cn-chengdu.aliyuncs.com","aliyun-nox60-cd") {
                             dockerImageCore.push('0.0.1')
