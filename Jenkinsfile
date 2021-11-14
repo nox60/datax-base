@@ -34,20 +34,20 @@ node {
     }
 
 
-    // stage ('Build docker image and push to registry'){
-    //     def dockerImageCore = null
-    //     try{
-    //         sh 'cp /usr/share/zoneinfo/Asia/Shanghai .'
-    //         dockerImageCore = docker.build("registry.cn-chengdu.aliyuncs.com/nox60/myp")
-    //         docker.withRegistry("https://registry.cn-chengdu.aliyuncs.com","aliyun-nox60-cd") {
-    //                         dockerImageCore.push('0.0.1')
-    //         }
-    //     }catch(e){
-    //         env.CURRENT_STAGE = '打包镜像 & 推送到仓库'
-    //         env.FAILED_REASON = e
-    //         throw e
-    //     }
-    // }
+    stage ('Build docker image and push to registry'){
+        def dockerImageCore = null
+        try{
+            sh 'cp /usr/share/zoneinfo/Asia/Shanghai .'
+            dockerImageCore = docker.build("registry.cn-hangzhou.aliyuncs.com/nox60/datax-base")
+            docker.withRegistry("https://registry.cn-chengdu.aliyuncs.com","aliyun-nox60-cd") {
+                            dockerImageCore.push('0.0.1')
+            }
+        }catch(e){
+            env.CURRENT_STAGE = '打包镜像 & 推送到仓库'
+            env.FAILED_REASON = e
+            throw e
+        }
+    }
 
 
 }
