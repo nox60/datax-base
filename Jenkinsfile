@@ -23,7 +23,7 @@ node {
     //构建程序
     stage ('Build'){
         try{
-            docker.image('registry.cn-hangzhou.aliyuncs.com/nox60/maven:3.5.2').inside('-v /opt/local/maven/m2:/root/.m2 --entrypoint "" ') {
+            docker.image('registry.cn-shenzhen.aliyuncs.com/nox60/maven-public:3.5.2').inside('-v /opt/local/maven/m2:/root/.m2 --entrypoint "" ') {
                 sh 'mvn -U clean package assembly:assembly -Dmaven.test.skip=true -pl "!oceanbasev10reader,!oceanbasev10writer" '
             }
         } catch(e){
