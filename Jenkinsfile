@@ -24,7 +24,7 @@ node {
     stage ('Build'){
         try{
             docker.image('registry.cn-hangzhou.aliyuncs.com/nox60/maven:3.5.2').inside('-v /opt/local/maven/m2:/root/.m2 --entrypoint "" ') {
-                sh 'mvn -U clean package assembly:assembly -Dmaven.test.skip=true -pl "!<modulename>,!<modulename2>" '
+                sh 'mvn -U clean package assembly:assembly -Dmaven.test.skip=true -pl "!oceanbasev10reader,!oceanbasev10writer" '
             }
         } catch(e){
             env.CURRENT_STAGE = '编译代码'
