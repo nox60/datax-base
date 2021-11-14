@@ -38,6 +38,8 @@ node {
         def dockerImageCore = null
         try{
             sh 'cp /usr/share/zoneinfo/Asia/Shanghai .'
+            sh 'cp target/datax.tar.gz .'
+
 //             sh 'cat>Dockerfile<<EOF
 //                 FROM openjdk:8u312-jdk-slim
 //                 RUN export LANG="zh_CN.UTF-8"
@@ -47,6 +49,7 @@ node {
 //                 ADD Shanghai /etc/localtime
 //             EOF'
             sh 'echo "FROM openjdk:8u312-jdk-slim">Dockerfile'
+            sh 'echo "ADD datax.tar.gz /opt/local/">Dockerfile'
             dockerImageCore = docker.build("registry.cn-hangzhou.aliyuncs.com/nox60/datax-base")
             docker.withRegistry("https://registry.cn-chengdu.aliyuncs.com","aliyun-nox60-cd") {
                             dockerImageCore.push('0.0.1')
